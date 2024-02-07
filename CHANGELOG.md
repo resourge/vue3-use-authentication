@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/resourge/vue3-hook-form/compare/v1.0.0...v1.1.0) (2024-02-07)
+
+
+### Features
+
+* **added export default types:** export default types ([d6e99c1](https://github.com/resourge/vue3-hook-form/commit/d6e99c1e6f8e0f9f453a3cf35e93637e5cf40c92))
+
 # 1.0.0 (2024-02-07)
 
 
