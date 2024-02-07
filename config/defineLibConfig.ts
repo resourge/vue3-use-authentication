@@ -33,8 +33,8 @@ export const defineLibConfig = (
 				},
 				external: [
 					'tsconfig-paths', 'typescript', 'path', 
-					'fs', 'vite', 'react', 'url',
-					'react/jsx-runtime',
+					'fs', 'vite', 'url', 
+					'@resourge/shallow-clone',
 					'vue'
 				]
 			}
