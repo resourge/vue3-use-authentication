@@ -1,6 +1,7 @@
 {
   "name": "@resourge/vue3-hook-form",
   "version": "0.0.0-development",
+  "description": "vue3-hook-form is a simple and basic controlled hook form. Aiming to create forms with minimal effort.",
   "type": "module",
   "private": false,
   "publishConfig": {
@@ -50,7 +51,19 @@
     "typescript": "^5.3.3",
     "vite": "4.3.2",
     "vite-plugin-dts": "^2.3.0",
-    "vite-tsconfig-paths": "^4.2.0"
+    "vite-tsconfig-paths": "^4.2.0",
+	"eslint": "^8.56.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-typescript-sort-keys": "^2.3.0",
+    "eslint-plugin-vue": "^9.21.1",
+	"@vue/eslint-config-typescript": "^11.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "vue-eslint-parser": "^9.4.2"
   },
   "peerDependencies": {
     "vue": ">=3.2.47",
