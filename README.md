@@ -1,14 +1,35 @@
+## `useForm` Documentation
 
+### Introduction
 
-## Usage useForm
+`useForm` is a custom hook designed to facilitate form state management and validation in Vue 3 applications. This documentation provides a comprehensive guide on how to integrate and utilize `useForm` effectively within your project.
 
-Here is an example of how to use the useForm form state and validation in your Vue 3 application:
+### Installation
 
-```jsx
-// Import the package and create a form instance
-import { useForm } from '../modules/useForm.ts'; // replace with correct path
-import { object, string } from '@resourge/schema'; // validation schema documentation [Link](https://resourge.vercel.app/schema/intro)
+To start using `useForm`, first, ensure you have the package installed in your Vue 3 project. You can install it via npm or yarn:
 
+```bash
+npm install vue3-hook-form
+```
+
+or
+
+```bash
+yarn add vue3-hook-form
+```
+
+### Usage
+
+#### Importing the Package
+
+```javascript
+import { useForm } from 'vue3-hook-form';
+```
+
+#### Defining Form Data Model and Validation Schema
+
+```javascript
+import { object, string } from '@resourge/schema';
 
 // Define the shape of your form data
 export class LoginUserFormModel {
@@ -28,8 +49,11 @@ const schema = object<LoginUserFormModel>({
   username: string().notNullable().required('Username is required'),
   password: string().notNullable().required('Password is required')
 });
+```
 
-// Create a form instance with default values and validation
+#### Creating a Form Instance
+
+```javascript
 export const useLoginForm = () => {
   return useForm<LoginUserFormModel>(new LoginUserFormModel(), {
     validate: (form) => {
@@ -38,16 +62,11 @@ export const useLoginForm = () => {
     validateDefault: true
   });
 };
+```
 
-// Use the form instance in your Vue component
-const { form, handleSubmit, reset, getErrors } = useLoginForm();
+#### Using the Form Instance in Vue Component
 
-// Define a submit handler for your form
-const onSubmit = handleSubmit(async () => {
-  // Your form submission logic here
-});
-
-// In your Vue template, bind form fields to form state and display validation errors
+```vue
 <template>
   <form @submit.prevent="onSubmit">
     <FormControl :label="T.pages.login.form.username" :errors="getErrors('username')">
@@ -61,70 +80,53 @@ const onSubmit = handleSubmit(async () => {
     </div>
   </form>
 </template>
+
+<script>
+import { useLoginForm } from '../modules/useForm.ts';
+
+export default {
+  setup() {
+    const { form, handleSubmit, getErrors } = useLoginForm();
+
+    const onSubmit = handleSubmit(async () => {
+      // Your form submission logic here
+    });
+
+    return {
+      form,
+      onSubmit,
+      getErrors
+    };
+  }
+};
+</script>
 ```
 
-# FormState
+### FormState
 
-The `FormState` type represents the state of a form in your application when using the `useForm` function. It provides various methods and properties to interact with and manage the form's state and data.
+`FormState` represents the state of a form managed by `useForm`. It offers various methods and properties to interact with and manage the form's state and data.
 
-## Properties and Methods
+#### Properties and Methods
 
-### `changeValue(key, value)`
+- **`changeValue(key, value)`**: Updates the value of a specific field in the form.
+- **`errors`**: An object containing validation errors for the form fields.
+- **`field`**: Options and configurations for the form fields.
+- **`form`**: Representation of the current state of the form data.
+- **`getErrors(key)`**: Get the validation errors for a specific field in the form.
+- **`getValue(key)`**: Get the current value of a specific field in the form.
+- **`handleSubmit(onSubmit)`**: Handles form submission.
+- **`hasError(key)`**: Checks if a specific field in the form has validation errors.
+- **`isValid`**: Indicates whether the form is currently in a valid state.
+- **`onChange(key)`**: Attaches an event listener to a specific form field.
+- **`reset(newForm)`**: Resets the form to a specified state.
+- **`setError(error)`**: Sets a validation error for the form or a specific field.
+- **`watch(callback)`**: Registers a callback function to watch for changes in the form's state.
 
-- **Description:** Updates the value of a specific field in the form.
+### Support for Complex Forms
 
-### `errors`
+`useForm` supports complex forms such as wizards, multi-step, and nested state. Here's an example of defining a nested form:
 
-- **Description:** An object containing validation errors for the form fields. The structure of this object matches the shape of the form data (T).
-
-### `field`
-
-- **Description:** Options and configurations for the form fields.
-
-### `form`
-
-- **Description:** Representation of the current state of the form data. This is a reactive object that reflects changes made to the form fields.
-
-### `getErrors(key)`
-
-- **Description:** Get the validation errors for a specific field in the form.
-
-### `getValue(key)`
-
-- **Description:** Get the current value of a specific field in the form.
-
-### `handleSubmit(onSubmit)`
-
-- **Description:** Handles form submission by invoking the provided callback function when the form is submitted. Returns a function that can be used as an event handler for form submission events.
-
-### `hasError(key)`
-
-- **Description:** Checks if a specific field in the form has validation errors.
-
-### `isValid`
-
-- **Description:** Indicates whether the form is currently in a valid state (i.e., no validation errors).
-
-### `onChange(key)`
-
-- **Description:** Attaches an event listener to a specific form field. When the field's value changes, the provided callback function is invoked with the new value.
-
-### `reset(newForm)`
-
-- **Description:** Resets the form to a specified state by replacing the current form data with the provided partial data object (`newForm`).
-
-### `setError(error)`
-
-- **Description:** Sets a validation error for the form or a specific field in the form. The `error` parameter can be a single error message or an object containing field-specific error messages.
-
-### `watch(callback)`
-
-- **Description:** Registers a callback function to watch for changes in the form's state. When any of the form fields change their values, the provided callback is invoked with an array of keys representing the changed fields.
-
-
-## Support for complex forms like (wizards, multi-step, nested state)
-
-```jsx
+```javascript
 // Define the shape of your form data
 export class UserAddressModel {
   public street = '';
@@ -161,3 +163,5 @@ export const useUserProfileForm = () => {
   });
 };
 ```
+
+This documentation provides a comprehensive guide on how to integrate `useForm` into your Vue 3 applications, enabling efficient form management and validation.

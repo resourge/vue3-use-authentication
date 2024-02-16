@@ -149,6 +149,11 @@ type FormState<T extends Record<string, any>> = {
   setError: (error: ValidationError | ValidationWithErrors) => void;
 
   /**
+   * An object containing the touched state of the form fields. This object tracks which fields
+   */
+  touches: Touches<T>;
+
+  /**
    * Registers a callback function to watch for changes in the form's state. When any of the form
    * fields change their values, the provided callback is invoked with an array of keys
    * representing the changed fields.
@@ -306,6 +311,7 @@ export const useForm = <T extends Record<string, any>>(defaultValues: T, options
     isValid,
     reset,
     watch,
-    resetIsDirty
+    resetIsDirty,
+    touches: state.touches
   };
 };
