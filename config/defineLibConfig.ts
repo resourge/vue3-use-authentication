@@ -34,7 +34,7 @@ export const defineLibConfig = (
 				external: [
 					'tsconfig-paths', 'typescript', 'path', 
 					'fs', 'vite', 'url', 
-					'@resourge/shallow-clone',
+					'crypto-js',
 					'vue'
 				]
 			}

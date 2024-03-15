@@ -1,15 +1,18 @@
-import { useForm, type FieldOptions } from './useForm'
-import {
-	type OnErrors,
-	type ValidationErrors
-} from './validators'
+import useAuthentication from './hooks/useAuthentication';
+import { usePermissions } from './hooks/usePermissions';
 
-export * from './types'
+import AuthenticationProvider from './provider/AuthenticationProvider.vue';
+import { useAuthenticationStorage } from './store/useAuthGlobalStore';
+
+type AuthenticationProviderProps = {
+    encrypted: boolean;
+    encryptedSecret: string;
+    localStorageSessionKey: string;
+};
 
 export {
-	useForm,
-	type FieldOptions,
-	type OnErrors,
-	type ValidationErrors
-}
+    AuthenticationProvider, useAuthentication,
+    useAuthenticationStorage,
+    usePermissions, type AuthenticationProviderProps
+};
 
