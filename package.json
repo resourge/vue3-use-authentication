@@ -89,6 +89,6 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/resourge/vue3-use-auth.git"
+		"url": "https://github.com/resourge/vue3-use-authentication.git"
 	}
 }
