@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/resourge/vue3-use-authentication/compare/v1.0.0...v1.1.0) (2024-03-22)
+
+
+### Features
+
+* **new way to encrypt fast and smaller:** new encrypt ([bbc9891](https://github.com/resourge/vue3-use-authentication/commit/bbc989113ed42aa0ca7a066b5ae7b4a899d8a38a))
+
 # 1.0.0 (2024-03-15)
 
 
