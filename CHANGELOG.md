@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/resourge/vue3-use-authentication/compare/v1.1.0...v1.1.1) (2024-03-22)
+
+
+### Bug Fixes
+
+* **fix secret number:** fix secret number ([f9a61e6](https://github.com/resourge/vue3-use-authentication/commit/f9a61e6ea222601007f003b4a24eb5184560cd63))
+
 # [1.1.0](https://github.com/resourge/vue3-use-authentication/compare/v1.0.0...v1.1.0) (2024-03-22)
 
 
