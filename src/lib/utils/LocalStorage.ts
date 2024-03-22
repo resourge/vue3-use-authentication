@@ -8,10 +8,20 @@ export class LocalStorage {
    * Initialize local storage
    * @param secret 
    */
+
+  private stringToNumber(s: string) {
+    let total = 0;
+    for (let i = 0; i < s.length; i++) {
+      total += s.charCodeAt(i);
+    }
+    return total;
+  }
+
+
   constructor(secret?: string) {
-    ls.config.encrypt = true;
     if (secret) {
-      ls.config.secret = secret;
+      ls.config.encrypt = true;
+      ls.config.secret = this.stringToNumber(secret);
       this.isEncrypted = true;
     }
   }
