@@ -25,7 +25,7 @@ export type Store<U, P> = {
 
 type AuthenticationStorage = {
   clearValue: (string: string) => void,
-  getValue: (string: string) => string | null,
+  getValue: (string: string) => unknown | null,
   localStorageSessionKey: string
   onRefreshToken: (token: string) => void;
 }
