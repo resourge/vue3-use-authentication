@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/resourge/vue3-use-authentication/compare/v1.1.2...v1.2.0) (2024-03-22)
+
+
+### Features
+
+* **new version:** new version ([22c03e0](https://github.com/resourge/vue3-use-authentication/commit/22c03e029c5b7cb2077217ec0c73ec53119dc9f4))
+
+
+### Performance Improvements
+
+* **bundle crypt:** bundle crypt ([9941b98](https://github.com/resourge/vue3-use-authentication/commit/9941b98387f67a1248e2c8a3a92e50048fbf1627))
+
 # 1.0.0 (2024-03-22)
 
 
