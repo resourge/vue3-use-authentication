@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/resourge/vue3-use-authentication/compare/v1.2.0...v1.2.1) (2024-03-22)
+
+
+### Bug Fixes
+
+* **missing import:** missing import ([3f5ea6a](https://github.com/resourge/vue3-use-authentication/commit/3f5ea6a57fee117286864d9fc560d6f27f4a26a2))
+
 # [1.2.0](https://github.com/resourge/vue3-use-authentication/compare/v1.1.2...v1.2.0) (2024-03-22)
 
 
