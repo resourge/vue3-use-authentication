@@ -4,7 +4,7 @@
 
 ## Description
 
-Provide a brief description of the project, highlighting its purpose, main features, and benefits.
+Vue 3 Authentication is a Vue 3 composition API library for managing user authentication and permissions.
 
 ## Table of Contents
 
@@ -29,7 +29,6 @@ yarn add @resourge/vue3-use-authentication
 
 ### Configuration
 
-
 In your main `App.vue` file, configure the `AuthenticationProvider` component. This component is responsible for managing authentication state throughout your application.
 
 ```vue
@@ -50,7 +49,7 @@ Replace `SESSION_STORAGE_KEY` and `SOME_RANDOM_STRING` with your actual session 
 
 Define your user Profile and Permissions in your application. You can use TypeScript interfaces or classes to define your user profile and permissions.:
 
-`User.ts`
+`Profile.ts`
 
 ```typescript
 export class Profile {
@@ -67,7 +66,7 @@ export class Profile {
 ```
 
 
-`useAuthentication.ts`
+Wrapper for the `useAuthentication` to set the Profile and Permissions types.
 
 ```typescript
 import { useAuthentication as useAuthenticationBase } from '@resourge/vue3-use-authentication'
@@ -95,7 +94,7 @@ export default class Permissions {
 
 ```
 
-`usePermissions.ts`
+Wrapper for the `usePermissions` to set the Profile and Permissions types.
   
   ```typescript
 import { usePermissions as usePermissionsBase } from '@resourge/vue3-use-authentication'
@@ -112,7 +111,7 @@ export default function usePermissions(){
 
 ```javascript
 import { defineComponent } from 'vue';
-import useAuthentication from './shared/authentication/user/usePermissions'; // Replace with your actual file path
+import useAuthentication from './shared/authentication/user/useAuthentication'; // Replace with your actual file path
 
 export default defineComponent({
   setup() {
@@ -182,9 +181,11 @@ export default defineComponent({
 });
 ```
 
+For more detailed usage instructions, refer to the [documentation](#documentation).
+
 ## Documentation
 
-Link to the project's documentation, if available, or provide information on where users can find more detailed documentation and resources.
+For comprehensive documentation and usage examples, visit the [Vue 3 Authentication documentation](https://resourge.vercel.app/docs/vue3-use-authentication/intro).
 
 ## Contributing
 
@@ -192,8 +193,9 @@ Contributions to Vue 3 Authentication are welcome! To contribute, please follow 
 
 ## License
 
-Include licensing information for the project, specifying the license under which it is distributed.
+Vue 3 Authentication is licensed under the [MIT License](LICENSE).
 
 ## Contact
 
-Provide contact information for the project maintainers, including email addresses, social media profiles, or links to issue trackers or forums where users can ask questions and seek support.
+For questions or support, please contact the maintainers:
+- GitHub: [Resourge](https://github.com/resourge)
