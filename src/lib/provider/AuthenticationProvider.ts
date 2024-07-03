@@ -5,8 +5,6 @@ import { Store, useAuthenticationStorage } from '../store/useAuthGlobalStore'; /
 const AUTH_SYMBOL_KEY = 'AuthenticationContext'
 
 type AuthenticationProviderProps = {
-  encrypted: boolean;
-  encryptedSecret: string;
   localStorageSessionKey: string;
   onRefreshToken: (token: string) => void;
 };

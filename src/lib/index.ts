@@ -5,8 +5,6 @@ import AuthenticationProvider from './provider/AuthenticationProvider.vue';
 import { useAuthenticationStorage } from './store/useAuthGlobalStore';
 
 type AuthenticationProviderProps = {
-    encrypted: boolean;
-    encryptedSecret: string;
     localStorageSessionKey: string;
 };
 
