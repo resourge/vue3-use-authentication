@@ -19,7 +19,7 @@ export const useLocalStorage = ({ encrypted, encryptedSecret }: LocalStoragePara
             return JSON.parse(decryptedValue)
         }
         const local_value = localStorage.getItem(key) ?? ''
-        return JSON.parse(local_value)
+        return JSON.parse(local_value.replaceAll('\\', ''))
     }
 
     const setValue = async (key: string, value: any) => {
