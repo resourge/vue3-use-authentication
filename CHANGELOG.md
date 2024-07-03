@@ -1,3 +1,10 @@
+## [1.4.9](https://github.com/resourge/vue3-use-authentication/compare/v1.4.8...v1.4.9) (2024-07-03)
+
+
+### Bug Fixes
+
+* **async provider:** async provider ([ebf9b92](https://github.com/resourge/vue3-use-authentication/commit/ebf9b92a32e53d9b972d1fa60b5fa50704853769))
+
 ## [1.4.8](https://github.com/resourge/vue3-use-authentication/compare/v1.4.7...v1.4.8) (2024-07-03)
 
 
