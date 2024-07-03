@@ -37,11 +37,13 @@ import { AuthenticationProvider } from '@resourge/vue3-use-authentication';
 </script>
 
 <template>
-  <AuthenticationProvider :localStorageSessionKey="SESSION_STORAGE_KEY">
+  <AuthenticationProvider :localStorageSessionKey="SESSION_STORAGE_KEY" encrypted :encryptedSecret="SOME_RANDOM_STRING">
     <RouterView />
   </AuthenticationProvider>
 </template>
 ```
+
+Replace `SESSION_STORAGE_KEY` and `SOME_RANDOM_STRING` with your actual session storage key and encrypted secret respectively.
 
 ### Profile and Permissions
 

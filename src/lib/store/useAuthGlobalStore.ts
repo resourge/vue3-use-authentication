@@ -3,6 +3,8 @@ import { Ref, computed, reactive, ref, toRefs, watch } from 'vue';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
 type AuthenticationProviderProps = {
+  encrypted: boolean;
+  encryptedSecret: string;
   localStorageSessionKey: string;
   onRefreshToken: (token: string) => void;
 };
@@ -78,8 +80,8 @@ const logout = <U, P>(state: Ref<State<U, P>>, storageKey: string, clearValue: (
   clearValue(storageKey);
 };
 
-export function useAuthenticationStorage<U, P>({ localStorageSessionKey, onRefreshToken }: AuthenticationProviderProps) {
-  const { clearValue, getValue, setValue } = useLocalStorage()
+export function useAuthenticationStorage<U, P>({ encrypted, localStorageSessionKey, encryptedSecret, onRefreshToken }: AuthenticationProviderProps) {
+  const { clearValue, getValue, setValue } = useLocalStorage({ encrypted, encryptedSecret })
 
   const state = createState<U, P>({
     localStorageSessionKey,
@@ -110,8 +112,8 @@ export function useAuthenticationStorage<U, P>({ localStorageSessionKey, onRefre
   };
 }
 
-export function useGlobalStore<U, P>({ localStorageSessionKey, onRefreshToken }: AuthenticationProviderProps) {
-  const { clearValue, getValue, setValue } = useLocalStorage()
+export function useGlobalStore<U, P>({ encrypted, localStorageSessionKey, onRefreshToken }: AuthenticationProviderProps) {
+  const { clearValue, getValue, setValue } = useLocalStorage({ encrypted })
 
   const state = createState<U, P>({
     localStorageSessionKey,
