@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/resourge/vue3-use-authentication/compare/v1.2.1...v1.3.0) (2024-07-03)
+
+
+### Features
+
+* **remove encrypt:** remove encrypt ([372f108](https://github.com/resourge/vue3-use-authentication/commit/372f1080129f33012b0d39328b0350d873f31ec5))
+
 ## [1.2.1](https://github.com/resourge/vue3-use-authentication/compare/v1.2.0...v1.2.1) (2024-03-22)
 
 
