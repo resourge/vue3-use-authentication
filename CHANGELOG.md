@@ -1,3 +1,10 @@
+## [1.4.12](https://github.com/resourge/vue3-use-authentication/compare/v1.4.11...v1.4.12) (2024-07-03)
+
+
+### Bug Fixes
+
+* **remove parse:** remove parse ([99e9114](https://github.com/resourge/vue3-use-authentication/commit/99e91142cd54a25a6922028c7350cfdfcaaed526))
+
 ## [1.4.11](https://github.com/resourge/vue3-use-authentication/compare/v1.4.10...v1.4.11) (2024-07-03)
 
 
