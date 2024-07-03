@@ -1,3 +1,10 @@
+## [1.4.5](https://github.com/resourge/vue3-use-authentication/compare/v1.4.4...v1.4.5) (2024-07-03)
+
+
+### Bug Fixes
+
+* **fix string:** fix string ([16dc655](https://github.com/resourge/vue3-use-authentication/commit/16dc655a1416e864c5bb1ca7b2c9bbb37759439e))
+
 ## [1.4.4](https://github.com/resourge/vue3-use-authentication/compare/v1.4.3...v1.4.4) (2024-07-03)
 
 
