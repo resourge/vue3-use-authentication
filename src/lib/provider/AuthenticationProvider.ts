@@ -13,9 +13,10 @@ type AuthenticationProviderProps = {
 
 const AuthenticationSymbol = Symbol(AUTH_SYMBOL_KEY);
 
-export const provideAuthentication = async (props: AuthenticationProviderProps) => {
-   // Immediately-invoked async function to handle async operation
-  const authentication = await useAuthenticationStorage(props);
+
+export const provideAuthentication = (props: AuthenticationProviderProps) => {
+  const authentication = useAuthenticationStorage(props);
+
   provide(AuthenticationSymbol, authentication);
 };
 

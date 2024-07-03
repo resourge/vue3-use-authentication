@@ -1,3 +1,13 @@
+function stringToArrayBuffer(str: string): ArrayBuffer {
+  const encoder = new TextEncoder();
+  return encoder.encode(str).buffer;
+}
+
+function arrayBufferToString(buffer: ArrayBuffer): string {
+  const decoder = new TextDecoder();
+  return decoder.decode(new Uint8Array(buffer));
+}
+
 function arrayBufferToBase64(buffer: ArrayBuffer): string {
   let binary = '';
   const bytes = new Uint8Array(buffer);
@@ -18,83 +28,47 @@ function base64ToArrayBuffer(base64: string): ArrayBuffer {
   return bytes.buffer;
 }
 
+function enhancedXorEncrypt(value: string, secret: string, passes = 2): string {
+  let result = value;
+  for (let pass = 0; pass < passes; pass++) {
+    let tempResult = '';
+    for (let i = 0; i < result.length; i++) {
+      const charCode = result.charCodeAt(i);
+      const keyCharCode = secret.charCodeAt((i + pass) % secret.length); // Slight variation
+      const encryptedChar = String.fromCharCode((charCode ^ keyCharCode) << 1);
+      tempResult += encryptedChar;
+    }
+    result = tempResult;
+  }
+  return result;
+}
+
+function enhancedXorDecrypt(value: string, secret: string, passes = 2): string {
+  let result = value;
+  for (let pass = passes - 1; pass >= 0; pass--) {
+    let tempResult = '';
+    for (let i = 0; i < result.length; i++) {
+      const charCode = result.charCodeAt(i);
+      const keyCharCode = secret.charCodeAt((i + pass) % secret.length); // Slight variation
+      const decryptedChar = String.fromCharCode((charCode >> 1) ^ keyCharCode);
+      tempResult += decryptedChar;
+    }
+    result = tempResult;
+  }
+  return result;
+}
 
 export class Encrypt {
-  public static async encryptValue(secretKey: string, value: string): Promise<string> {
-    const encoder = new TextEncoder();
-    const keyMaterial = await crypto.subtle.importKey(
-      'raw',
-      encoder.encode(secretKey),
-      'PBKDF2',
-      false,
-      ['deriveKey']
-    );
-
-    const salt = crypto.getRandomValues(new Uint8Array(16));
-    const derivedKey = await crypto.subtle.deriveKey(
-      {
-        name: 'PBKDF2',
-        salt: salt,
-        iterations: 100000,
-        hash: 'SHA-256'
-      },
-      keyMaterial,
-      { name: 'AES-GCM', length: 256 },
-      true,
-      ['encrypt']
-    );
-
-    const iv = crypto.getRandomValues(new Uint8Array(12));
-    const encrypted = await crypto.subtle.encrypt(
-      { name: 'AES-GCM', iv: iv },
-      derivedKey,
-      encoder.encode(value)
-    );
-
-    const combinedBuffer = new Uint8Array(salt.byteLength + iv.byteLength + encrypted.byteLength);
-    combinedBuffer.set(salt, 0);
-    combinedBuffer.set(iv, salt.byteLength);
-    combinedBuffer.set(new Uint8Array(encrypted), salt.byteLength + iv.byteLength);
-
-    return arrayBufferToBase64(combinedBuffer.buffer);
+  public static encryptValue(value: string, secret: string): string {
+    const encrypted = enhancedXorEncrypt(value, secret);
+    return arrayBufferToBase64(stringToArrayBuffer(encrypted));
   }
 
-  public static async decryptValue(secretKey: string, encryptedValue: string): Promise<string> {
-    const combinedBuffer = base64ToArrayBuffer(encryptedValue);
-    const salt = combinedBuffer.slice(0, 16);
-    const iv = combinedBuffer.slice(16, 28);
-    const encrypted = combinedBuffer.slice(28);
-
-    const encoder = new TextEncoder();
-    const keyMaterial = await crypto.subtle.importKey(
-      'raw',
-      encoder.encode(secretKey),
-      'PBKDF2',
-      false,
-      ['deriveKey']
-    );
-
-    const derivedKey = await crypto.subtle.deriveKey(
-      {
-        name: 'PBKDF2',
-        salt: new Uint8Array(salt),
-        iterations: 100000,
-        hash: 'SHA-256'
-      },
-      keyMaterial,
-      { name: 'AES-GCM', length: 256 },
-      true,
-      ['decrypt']
-    );
-
-    const decrypted = await crypto.subtle.decrypt(
-      { name: 'AES-GCM', iv: new Uint8Array(iv) },
-      derivedKey,
-      encrypted
-    );
-
-    const decoder = new TextDecoder();
-    return decoder.decode(decrypted);
+  public static decryptValue(value: string, secret: string): any | null {
+    if (value) {
+      const decrypted = enhancedXorDecrypt(arrayBufferToString(base64ToArrayBuffer(value)), secret);
+      return JSON.parse(decrypted);
+    }
+    return null;
   }
-
 }

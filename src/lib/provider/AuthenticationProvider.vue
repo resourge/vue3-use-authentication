@@ -22,8 +22,5 @@ const props = withDefaults(defineProps<AuthenticationProviderProps>(), {
   onRefreshToken: () => {}
 });
 
-// Use an IIFE to handle the async call
-(async () => {
-  await provideAuthentication(props);
-})();
+provideAuthentication(props)
 </script>

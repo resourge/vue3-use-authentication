@@ -25,12 +25,12 @@ export type Store<U, P> = {
 
 type AuthenticationStorage = {
   clearValue: (string: string) => void,
-  getValue: (string: string) => Promise<any>,
+  getValue: (string: string) => string | null,
   localStorageSessionKey: string
   onRefreshToken: (token: string) => void;
 }
 
-const createState = async <U, P>({ localStorageSessionKey, getValue, clearValue, onRefreshToken }: AuthenticationStorage) => {
+const createState = <U, P>({ localStorageSessionKey, getValue, clearValue, onRefreshToken }: AuthenticationStorage) => {
   // @ts-expect-error no type
   const state: Ref<State<U, P>> = ref(
     reactive<State<U, P>>({
@@ -41,25 +41,21 @@ const createState = async <U, P>({ localStorageSessionKey, getValue, clearValue,
     })
   );
 
-  const readStorageDataAndUpdate = async () => {
-    // Load data from local storage on store initialization
-    try {
-      const storedData = await getValue(localStorageSessionKey) as unknown as State<U, P>;
-      if (storedData) {
-        state.value = storedData;
-        if (state.value.token) {
-          onRefreshToken(state.value.token)
-        }
+  // Load data from local storage on store initialization
+  try {
+    const storedData = getValue(localStorageSessionKey) as unknown as State<U, P>;
+    if (storedData) {
+      state.value = storedData;
+      if(state.value.token) {
+        onRefreshToken(state.value.token)
       }
-    } catch (error) {
-      // resetting the local storage
-      clearValue(localStorageSessionKey)
-      // eslint-disable-next-line no-console
-      console.warn('Failed to load information from local storage.', error);
     }
+  } catch  (error) {
+    // resetting the localstorage
+    clearValue(localStorageSessionKey)
+    // eslint-disable-next-line no-console
+    console.warn('Failed to load information from local storage.', error);
   }
-
-  await readStorageDataAndUpdate()
 
   return state;
 };
@@ -84,10 +80,10 @@ const logout = <U, P>(state: Ref<State<U, P>>, storageKey: string, clearValue: (
   clearValue(storageKey);
 };
 
-export async function useAuthenticationStorage<U, P>({ encrypted, localStorageSessionKey, encryptedSecret, onRefreshToken }: AuthenticationProviderProps) {
+export function useAuthenticationStorage<U, P>({ encrypted, localStorageSessionKey, encryptedSecret, onRefreshToken }: AuthenticationProviderProps) {
   const { clearValue, getValue, setValue } = useLocalStorage({ encrypted, encryptedSecret })
 
-  const state = await createState<U, P>({
+  const state = createState<U, P>({
     localStorageSessionKey,
     getValue,
     clearValue,
@@ -116,10 +112,10 @@ export async function useAuthenticationStorage<U, P>({ encrypted, localStorageSe
   };
 }
 
-export async function useGlobalStore<U, P>({ encrypted, localStorageSessionKey, onRefreshToken }: AuthenticationProviderProps) {
+export function useGlobalStore<U, P>({ encrypted, localStorageSessionKey, onRefreshToken }: AuthenticationProviderProps) {
   const { clearValue, getValue, setValue } = useLocalStorage({ encrypted })
 
-  const state = await createState<U, P>({
+  const state = createState<U, P>({
     localStorageSessionKey,
     getValue,
     clearValue,

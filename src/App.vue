@@ -3,10 +3,10 @@ import {Encrypt} from './lib/utils/Crypto'
 
 
 const run = async () => {
-	const enc_value = await Encrypt.encryptValue('encryptedSecret', JSON.stringify({ name: 'helloo' }))
+	const enc_value = await Encrypt.encryptValue( JSON.stringify({ name: 'helloo', test: { sue: { ge: 'hello twice'}, bam: []} }), 'secret%&/(/&(&))')
 console.log('#encryptValue#', enc_value)
-const  value = await Encrypt.decryptValue('encryptedSecret', enc_value)
-console.log('#decryptValue#',JSON.parse(value))
+const  value = await Encrypt.decryptValue( enc_value, 'secret%&/(/&(&))')
+console.log('#decryptValue#',value)
 }
 
 run()
