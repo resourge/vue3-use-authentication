@@ -13,8 +13,8 @@ type AuthenticationProviderProps = {
 
 const AuthenticationSymbol = Symbol(AUTH_SYMBOL_KEY);
 
-export const provideAuthentication = async (props: AuthenticationProviderProps) => {
-  const authentication = await useAuthenticationStorage(props);
+export const provideAuthentication = (props: AuthenticationProviderProps) => {
+  const authentication = useAuthenticationStorage(props);
 
   provide(AuthenticationSymbol, authentication);
 };
