@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/resourge/vue3-use-authentication/compare/v1.4.1...v1.4.2) (2024-07-03)
+
+
+### Bug Fixes
+
+* **async state:** async state ([df5d1be](https://github.com/resourge/vue3-use-authentication/commit/df5d1be4826386a1f126dd9e580eabc1aaaa24a6))
+
 ## [1.4.1](https://github.com/resourge/vue3-use-authentication/compare/v1.4.0...v1.4.1) (2024-07-03)
 
 
