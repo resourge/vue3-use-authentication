@@ -42,6 +42,7 @@ import { AuthenticationProvider } from '@resourge/vue3-use-authentication';
   </AuthenticationProvider>
 </template>
 ```
+* Removed encrypt feature
 
 ### Profile and Permissions
 
