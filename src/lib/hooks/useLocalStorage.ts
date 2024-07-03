@@ -19,16 +19,15 @@ export const useLocalStorage = ({ encrypted, encryptedSecret }: LocalStoragePara
             return JSON.parse(decryptedValue)
         }
         const local_value = localStorage.getItem(key) ?? ''
-        return JSON.parse(local_value.replaceAll('\\', ''))
+        return JSON.parse(local_value)
     }
 
-    const setValue = async (key: string, value: any) => {
-        const stringifyValue = JSON.stringify(value)
+    const setValue = async (key: string, value: string) => {
         if (encrypted && encryptedSecret && value) {
-            const enc_value = await Encrypt.encryptValue(encryptedSecret, stringifyValue)
+            const enc_value = await Encrypt.encryptValue(encryptedSecret, value)
             localStorage.setItem(key, enc_value)
         }else {
-            localStorage.setItem(key, stringifyValue)
+            localStorage.setItem(key, value)
         }
     }
 
