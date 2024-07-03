@@ -13,6 +13,7 @@ export const useLocalStorage = ({ encrypted, encryptedSecret }: LocalStoragePara
 
     const getValue = async (key: string) => {
         const value = localStorage.getItem(key)
+        if(!value) return
         if (encrypted && encryptedSecret && value) {
             const decryptedValue = await Encrypt.decryptValue(encryptedSecret, value)
             return JSON.parse(decryptedValue)
