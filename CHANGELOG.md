@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/resourge/vue3-use-authentication/compare/v1.4.0...v1.4.1) (2024-07-03)
+
+
+### Bug Fixes
+
+* **cleanup:** cleanup deps encrypt ([48812c2](https://github.com/resourge/vue3-use-authentication/commit/48812c2d3c983bb732fb297456a12575dc4fedce))
+
 # [1.4.0](https://github.com/resourge/vue3-use-authentication/compare/v1.3.0...v1.4.0) (2024-07-03)
 
 
