@@ -1,3 +1,10 @@
+## [1.4.11](https://github.com/resourge/vue3-use-authentication/compare/v1.4.10...v1.4.11) (2024-07-03)
+
+
+### Bug Fixes
+
+* added enc for 64 ([00ab768](https://github.com/resourge/vue3-use-authentication/commit/00ab7680daca1f4b81d84e107cdf6feece4b59b8))
+
 ## [1.4.10](https://github.com/resourge/vue3-use-authentication/compare/v1.4.9...v1.4.10) (2024-07-03)
 
 
