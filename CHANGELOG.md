@@ -1,3 +1,10 @@
+## [1.4.6](https://github.com/resourge/vue3-use-authentication/compare/v1.4.5...v1.4.6) (2024-07-03)
+
+
+### Bug Fixes
+
+* **fix backslash:** fix back slash ([5aebf4f](https://github.com/resourge/vue3-use-authentication/commit/5aebf4fc1c0baadf6e31bbc781f46b9dfbf8b8a4))
+
 ## [1.4.5](https://github.com/resourge/vue3-use-authentication/compare/v1.4.4...v1.4.5) (2024-07-03)
 
 

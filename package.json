@@ -1,6 +1,6 @@
 {
   "name": "@resourge/vue3-use-authentication",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "description": "Vue 3 use Authentication/Permissions hook",
   "type": "module",
   "private": false,
