@@ -1,3 +1,10 @@
+## [1.4.7](https://github.com/resourge/vue3-use-authentication/compare/v1.4.6...v1.4.7) (2024-07-03)
+
+
+### Bug Fixes
+
+* **fix duplication stringify:** fix duplication stringify ([cbac190](https://github.com/resourge/vue3-use-authentication/commit/cbac190a032d38afac6799943d0d61a10773f450))
+
 ## [1.4.6](https://github.com/resourge/vue3-use-authentication/compare/v1.4.5...v1.4.6) (2024-07-03)
 
 
