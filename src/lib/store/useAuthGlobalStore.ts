@@ -30,7 +30,7 @@ type AuthenticationStorage = {
   onRefreshToken: (token: string) => void;
 }
 
-const createState = <U, P>({ localStorageSessionKey, getValue, clearValue, onRefreshToken }: AuthenticationStorage) => {
+const createState = async <U, P>({ localStorageSessionKey, getValue, clearValue, onRefreshToken }: AuthenticationStorage) => {
   // @ts-expect-error no type
   const state: Ref<State<U, P>> = ref(
     reactive<State<U, P>>({
@@ -59,7 +59,7 @@ const createState = <U, P>({ localStorageSessionKey, getValue, clearValue, onRef
     }
   }
 
-  readStorageDataAndUpdate()
+  await readStorageDataAndUpdate()
 
   return state;
 };
@@ -84,10 +84,10 @@ const logout = <U, P>(state: Ref<State<U, P>>, storageKey: string, clearValue: (
   clearValue(storageKey);
 };
 
-export function useAuthenticationStorage<U, P>({ encrypted, localStorageSessionKey, encryptedSecret, onRefreshToken }: AuthenticationProviderProps) {
+export async function useAuthenticationStorage<U, P>({ encrypted, localStorageSessionKey, encryptedSecret, onRefreshToken }: AuthenticationProviderProps) {
   const { clearValue, getValue, setValue } = useLocalStorage({ encrypted, encryptedSecret })
 
-  const state = createState<U, P>({
+  const state = await createState<U, P>({
     localStorageSessionKey,
     getValue,
     clearValue,
@@ -116,10 +116,10 @@ export function useAuthenticationStorage<U, P>({ encrypted, localStorageSessionK
   };
 }
 
-export function useGlobalStore<U, P>({ encrypted, localStorageSessionKey, onRefreshToken }: AuthenticationProviderProps) {
+export async function useGlobalStore<U, P>({ encrypted, localStorageSessionKey, onRefreshToken }: AuthenticationProviderProps) {
   const { clearValue, getValue, setValue } = useLocalStorage({ encrypted })
 
-  const state = createState<U, P>({
+  const state = await createState<U, P>({
     localStorageSessionKey,
     getValue,
     clearValue,
