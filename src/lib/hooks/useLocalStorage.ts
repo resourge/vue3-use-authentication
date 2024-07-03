@@ -15,8 +15,7 @@ export const useLocalStorage = ({ encrypted, encryptedSecret }: LocalStoragePara
         const value = localStorage.getItem(key)
         if(!value) return
         if (encrypted && encryptedSecret && value) {
-            const decryptedValue = Encrypt.decryptValue(value, encryptedSecret)
-            return JSON.parse(decryptedValue)
+            return  Encrypt.decryptValue(value, encryptedSecret)
         }
         const local_value = localStorage.getItem(key) ?? ''
         return JSON.parse(local_value)
