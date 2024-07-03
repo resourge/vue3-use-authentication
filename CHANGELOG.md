@@ -1,3 +1,16 @@
+# [1.4.0](https://github.com/resourge/vue3-use-authentication/compare/v1.3.0...v1.4.0) (2024-07-03)
+
+
+### Features
+
+* **updated crypto api:** crypto Api updated to AES-GCM and PBKDF2 ([9cb2f58](https://github.com/resourge/vue3-use-authentication/commit/9cb2f58d10f38026283ac10c7c253b0bf5e31a79))
+
+
+### Reverts
+
+* Revert "refactor(remove encrypt dep): remove encryp dep" ([a6c5018](https://github.com/resourge/vue3-use-authentication/commit/a6c501880b792e824216a0235d7e9ee290097613))
+* Revert "feat(remove encrypt): remove encrypt" ([79318e3](https://github.com/resourge/vue3-use-authentication/commit/79318e3e156e6568dd9cbcabefeb9dc3a4dca43d))
+
 # [1.3.0](https://github.com/resourge/vue3-use-authentication/compare/v1.2.1...v1.3.0) (2024-07-03)
 
 
