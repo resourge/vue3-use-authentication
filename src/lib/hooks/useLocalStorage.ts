@@ -11,19 +11,23 @@ export const useLocalStorage = ({ encrypted, encryptedSecret }: LocalStoragePara
         throw new Error('You must provide an encrypted secret to use encrypted local storage')
     }
 
-    const getValue = (key: string) => {
+    const getValue = async (key: string) => {
         const value = localStorage.getItem(key)
         if (encrypted && encryptedSecret && value) {
-            return Encrypt.decrypt(value, encryptedSecret)
+            const decryptedValue = await Encrypt.decryptValue(encryptedSecret, value)
+            return JSON.parse(decryptedValue)
         }
-        return localStorage.getItem(key)
+        const local_value = localStorage.getItem(key) ?? ''
+        return JSON.parse(local_value)
     }
 
-    const setValue = (key: string, value: any) => {
+    const setValue = async (key: string, value: any) => {
+        const stringifyValue = JSON.parse(value)
         if (encrypted && encryptedSecret && value) {
-            return localStorage.setItem(key, Encrypt.encrypt(value, encryptedSecret))
+            const enc_value = await Encrypt.encryptValue(encryptedSecret, stringifyValue)
+            return localStorage.setItem(key, enc_value)
         }
-        return localStorage.setItem(key, value)
+        return localStorage.setItem(key, stringifyValue)
     }
 
     const clearValue = (key: string) => {
