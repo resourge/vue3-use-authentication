@@ -1,3 +1,15 @@
+# [1.5.0](https://github.com/resourge/vue3-use-authentication/compare/v1.4.12...v1.5.0) (2025-01-16)
+
+
+### Bug Fixes
+
+* **fix eslint:** fix eslint ([b96406d](https://github.com/resourge/vue3-use-authentication/commit/b96406de80cae144f616085ef7c051bd50951ebf))
+
+
+### Features
+
+* **validation expired token:** new validation for expired token ([dce5056](https://github.com/resourge/vue3-use-authentication/commit/dce505631852fa7846e0e8cd5b00f149e98d0030))
+
 ## [1.4.12](https://github.com/resourge/vue3-use-authentication/compare/v1.4.11...v1.4.12) (2024-07-03)
 
 
