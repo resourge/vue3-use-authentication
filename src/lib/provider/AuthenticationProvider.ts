@@ -1,5 +1,5 @@
 // authenticationProvider.ts
-import { Ref, computed, inject, provide, readonly } from 'vue';
+import { Ref, computed, inject, provide, readonly, ref } from 'vue';
 import { Store, useAuthenticationStorage } from '../store/useAuthGlobalStore'; // Import your existing code
 
 const AUTH_SYMBOL_KEY = 'AuthenticationContext'
@@ -26,13 +26,11 @@ export const useAuthenticationProvider = <U, P>() => {
   if (!authentication) {
     throw new Error('useAuthenticationProvider must be used within a component with provideAuthentication.');
   }
-
-  const isAuthenticated = readonly(computed(() => !!authentication.state.token));
-
+  
   // added readonly for auth state where cannot be mutated internally unless the user make the login again
   // only actions can mutate state
   return {
-    isAuthenticated: readonly(isAuthenticated),
+    isAuthenticated: readonly(ref(authentication.isAuthenticated)),
     profile: authentication.state.profile as U as unknown as Ref<U>,
     login: authentication.login,
     logout: authentication.logout

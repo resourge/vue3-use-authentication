@@ -12,12 +12,12 @@ export const useLocalStorage = ({ encrypted, encryptedSecret }: LocalStoragePara
     }
 
     const getValue = (key: string) => {
-        const value = localStorage.getItem(key)
+        const value = sessionStorage.getItem(key)
         if(!value) return
         if (encrypted && encryptedSecret && value) {
             return  Encrypt.decryptValue(value, encryptedSecret)
         }
-        const local_value = localStorage.getItem(key) ?? ''
+        const local_value = sessionStorage.getItem(key) ?? ''
         return JSON.parse(local_value)
     }
 
@@ -25,14 +25,14 @@ export const useLocalStorage = ({ encrypted, encryptedSecret }: LocalStoragePara
         if(!value) return 
         if (encrypted && encryptedSecret && value) {
             const enc_value = Encrypt.encryptValue(value, encryptedSecret)
-            localStorage.setItem(key, enc_value)
+            sessionStorage.setItem(key, enc_value)
         }else {
-            localStorage.setItem(key, value)
+            sessionStorage.setItem(key, value)
         }
     }
 
     const clearValue = (key: string) => {
-        localStorage.removeItem(key)
+        sessionStorage.removeItem(key)
     }
 
     return {

@@ -18,6 +18,7 @@ export type State<U, P> = {
 
 
 export type Store<U, P> = {
+  isAuthenticated: boolean
   login: (profile: U, permissions: P, token: string, cookieRef: string) => void;
   logout: () => void;
   state: State<U, P>;
@@ -29,6 +30,33 @@ type AuthenticationStorage = {
   localStorageSessionKey: string
   onRefreshToken: (token: string) => void;
 }
+
+/**
+ * Checks if the token is valid and not expired.
+ * @param token - JWT token.
+ * @returns boolean - True if the token is valid, false otherwise.
+ */
+const isTokenValid = (token: string): boolean => {
+  try {
+    // Split the token into parts: header, payload, and signature
+    const [, payload] = token.split('.');
+    if (!payload) {
+      throw new Error('Invalid token structure.');
+    }
+
+    // Decode the payload from Base64
+    const decodedPayload = JSON.parse(atob(payload));
+
+    // Check if the 'exp' field exists and verify expiration
+    if (!decodedPayload.exp) {
+      throw new Error('Token has no expiration field.');
+    }
+    const isExpired = Date.now() >= decodedPayload.exp * 1000;
+    return !isExpired;
+  } catch (error) {
+    return false;
+  }
+};
 
 const createState = <U, P>({ localStorageSessionKey, getValue, clearValue, onRefreshToken }: AuthenticationStorage) => {
   // @ts-expect-error no type
@@ -45,16 +73,16 @@ const createState = <U, P>({ localStorageSessionKey, getValue, clearValue, onRef
   try {
     const storedData = getValue(localStorageSessionKey) as unknown as State<U, P>;
     if (storedData) {
-      state.value = storedData;
-      if(state.value.token) {
-        onRefreshToken(state.value.token)
+      if(storedData && storedData.token && isTokenValid(storedData.token)) {
+        state.value = storedData;
+        onRefreshToken(storedData.token)
+      } else {
+        throw new Error('Invalid/Expired token')
       }
     }
-  } catch  (error) {
+  } catch {
     // resetting the localstorage
     clearValue(localStorageSessionKey)
-    // eslint-disable-next-line no-console
-    console.warn('Failed to load information from local storage.', error);
   }
 
   return state;
@@ -93,7 +121,7 @@ export function useAuthenticationStorage<U, P>({ encrypted, localStorageSessionK
   const loginAction = login(state, localStorageSessionKey, setValue);
   const logoutAction = logout(state, localStorageSessionKey, clearValue);
 
-  const isAuthenticated = computed(() => !!state.value.token).value;
+  const isAuthenticated = computed(() => !!state.value.token);
 
   watch(
     () => state,
