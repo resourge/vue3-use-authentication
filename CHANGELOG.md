@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/resourge/vue3-use-authentication/compare/v1.5.0...v1.5.1) (2025-11-06)
+
+
+### Bug Fixes
+
+* **spread error from invalid session:** show in console the error from a invalid session ([a46fe95](https://github.com/resourge/vue3-use-authentication/commit/a46fe95462f39791e1d55fc53aba4361a651136a))
+
 # [1.5.0](https://github.com/resourge/vue3-use-authentication/compare/v1.4.12...v1.5.0) (2025-01-16)
 
 
