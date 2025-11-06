@@ -80,9 +80,11 @@ const createState = <U, P>({ localStorageSessionKey, getValue, clearValue, onRef
         throw new Error('Invalid/Expired token')
       }
     }
-  } catch {
+  } catch (error) {
     // resetting the localstorage
     clearValue(localStorageSessionKey)
+    // @ts-expect-error no type
+    throw new Error(error);
   }
 
   return state;
