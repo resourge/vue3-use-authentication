@@ -22,6 +22,5 @@
 				"assets": ["CHANGELOG.md", "package.json"]
 			}
 		]
-	],
-    "noCi": true
+	]
 }
