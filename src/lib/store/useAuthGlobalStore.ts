@@ -31,29 +31,44 @@ type AuthenticationStorage = {
   onRefreshToken: (token: string) => void;
 }
 
+
 /**
  * Checks if the token is valid and not expired.
+ *
  * @param token - JWT token.
  * @returns boolean - True if the token is valid, false otherwise.
  */
 const isTokenValid = (token: string): boolean => {
   try {
-    // Split the token into parts: header, payload, and signature
-    const [, payload] = token.split('.');
-    if (!payload) {
-      throw new Error('Invalid token structure.');
+    // A JWT must contain header, payload, and signature
+    const parts = token.split('.');
+
+    if (parts.length !== 3) {
+      return false;
     }
 
-    // Decode the payload from Base64
-    const decodedPayload = JSON.parse(atob(payload));
+    const [, payload] = parts;
 
-    // Check if the 'exp' field exists and verify expiration
-    if (!decodedPayload.exp) {
-      throw new Error('Token has no expiration field.');
+    // JWT uses Base64URL encoding, not standard Base64
+    const base64Payload = payload
+      .replace(/-/g, '+')
+      .replace(/_/g, '/')
+      .padEnd(Math.ceil(payload.length / 4) * 4, '=');
+
+    // Decode and parse the payload
+    const decodedPayload = JSON.parse(atob(base64Payload));
+
+    // The expiration time (exp) is required and must be a number
+    if (
+      typeof decodedPayload.exp !== 'number' ||
+      !Number.isFinite(decodedPayload.exp)
+    ) {
+      return false;
     }
-    const isExpired = Date.now() >= decodedPayload.exp * 1000;
-    return !isExpired;
-  } catch (error) {
+
+    // JWT exp is expressed in seconds since Unix epoch
+    return Date.now() < decodedPayload.exp * 1000;
+  } catch {
     return false;
   }
 };
