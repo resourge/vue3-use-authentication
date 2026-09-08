@@ -28,7 +28,7 @@ yarn add @resourge/vue3-use-authentication
 ## Usage
 
 ### Configuration
-
+ 
 In your main `App.vue` file, configure the `AuthenticationProvider` component. This component is responsible for managing authentication state throughout your application.
 
 ```vue
@@ -47,7 +47,7 @@ Replace `SESSION_STORAGE_KEY` and `SOME_RANDOM_STRING` with your actual session 
 
 ### Profile and Permissions
 
-Define your user Profile and Permissions in your application. You can use TypeScript interfaces or classes to define your user profile and permissions.:
+Define your user Profile and Permissions in your application. You can use TypeScript interfaces or classes to define your user profile and permissions.
 
 `Profile.ts`
 
